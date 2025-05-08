@@ -4,4 +4,13 @@ function removeLastNumber(arr) {
   return copyArr;
 }
 
-module.exports = removeLastNumber;
+function raiseSalaries(employees, percentage){
+    const salaryIncrease = employees.map((employee) => {
+      
+      employee.salary = Math.round((employee.salary / 100) * (100 + percentage)); 
+      return employee
+    })
+    
+    return salaryIncrease;
+}
+module.exports = {removeLastNumber, raiseSalaries};
