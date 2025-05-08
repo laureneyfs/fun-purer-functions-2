@@ -1,0 +1,23 @@
+{
+  "name": "fun-purer-functions-2",
+  "version": "1.0.0",
+  "description": "Instructions for this sprint can be found at: https://l2c.northcoders.com/courses/fun/purer-functions",
+  "main": "pure.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laureneyfs/fun-purer-functions-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laureneyfs/fun-purer-functions-2/issues"
+  },
+  "homepage": "https://github.com/laureneyfs/fun-purer-functions-2#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
