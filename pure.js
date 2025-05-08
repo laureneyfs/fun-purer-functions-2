@@ -4,13 +4,21 @@ function removeLastNumber(arr) {
   return copyArr;
 }
 
-function raiseSalaries(employees, percentage){
-    const salaryIncrease = employees.map((employee) => {
-      
-      employee.salary = Math.round((employee.salary / 100) * (100 + percentage)); 
-      return employee
-    })
-    
-    return salaryIncrease;
+function raiseSalaries(employees, percentage) {
+  const salaryIncrease = employees.map((employee) => {
+    employee.salary = Math.round((employee.salary / 100) * (100 + percentage));
+    return employee;
+  });
+
+  return salaryIncrease;
 }
-module.exports = {removeLastNumber, raiseSalaries};
+
+function updateTasks(person, ...tasks) {
+  const copyPerson = { ...person };
+  if (!copyPerson.name) {
+    return copyPerson;
+  }
+  copyPerson.tasks.push(...tasks);
+  return copyPerson;
+}
+module.exports = { removeLastNumber, raiseSalaries, updateTasks };

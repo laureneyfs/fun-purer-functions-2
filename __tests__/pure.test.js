@@ -1,4 +1,4 @@
-const { removeLastNumber, raiseSalaries } = require("../pure");
+const { removeLastNumber, raiseSalaries, updateTasks } = require("../pure");
 
 describe("removeLastNumber", () => {
   test("returns empty array when given one item", () => {
@@ -108,7 +108,7 @@ describe("raiseSalaries", () => {
     expect(result).not.toBe(input);
   });
 
-    test("returns a new Does not mutate original array", () => {
+  test("returns a new Does not mutate original array", () => {
     // Arrange
     const input = [
       { name: "Alice", salary: 3001 },
@@ -123,10 +123,76 @@ describe("raiseSalaries", () => {
       { name: "Bob", salary: 2200 },
       { name: "Vel", salary: 4950 },
     ];
-    
+
     // Act
     const result = raiseSalaries(input, percentage);
     // Assert
     expect(input).toEqual(copyInput);
+  });
+});
+
+//Takes a person object and one or more new tasks, and returns a new person object with the tasks array updated to include the new tasks. The original tasks array is not mutated.
+//example: updateTasks(person, "read books", "tidy room");
+
+//1. returns an empty object if given an empty object and no tasks
+//2. returns an unchanged object with values when given no tasks
+//2. returns an object with one task changed when given one task
+//3. returns an object with multiple tasks changed
+//4. returns a new object
+//5. doesn't mutate input
+
+describe("updateTasks", () => {
+  test("returns an empty object when given an empty object and no tasks", () => {
+    const person = {};
+    const result = updateTasks(person);
+    const expected = {};
+    expect(result).toEqual(expected);
+  });
+  test("returns an unchanged object with values when given no tasks", () => {
+    const person = { name: "Anat", tasks: ["feed Schnitzel", "Go to pottery"] };
+    const result = updateTasks(person);
+    const expected = {
+      name: "Anat",
+      tasks: ["feed Schnitzel", "Go to pottery"],
+    };
+    expect(result).toEqual(expected);
+  });
+  test("returns an object with one task changed when given one task", () => {
+    const person = { name: "Anat", tasks: ["feed Schnitzel", "Go to pottery"] };
+    const tasks = "read books";
+    const result = updateTasks(person, tasks);
+    const expected = {
+      name: "Anat",
+      tasks: ["feed Schnitzel", "Go to pottery", "read books"],
+    };
+    expect(result).toEqual(expected);
+  });
+  test("returns an object with multiple tasks changed", () => {
+    const person = { name: "Anat", tasks: ["feed Schnitzel", "Go to pottery"] };
+    const result = updateTasks(person, "read books", "tidy room");
+    const expected = {
+      name: "Anat",
+      tasks: ["feed Schnitzel", "Go to pottery", "read books", "tidy room"],
+    };
+    expect(result).toEqual(expected);
+  });
+  test("returns a new object", () => {
+    const person = { name: "Anat", tasks: ["feed Schnitzel", "Go to pottery"] };
+    const result = updateTasks(person, "read books", "tidy room");
+    const expected = {
+      name: "Anat",
+      tasks: ["feed Schnitzel", "Go to pottery", "read books", "tidy room"],
+    };
+    expect(result).not.toBe(person);
+  });
+  test("does not mutate inputs", () => {
+    const person = { name: "Anat", tasks: ["feed Schnitzel", "Go to pottery"] };
+    const copyPerson = { ...person };
+    updateTasks(person, "read books", "tidy room");
+    const expected = {
+      name: "Anat",
+      tasks: ["feed Schnitzel", "Go to pottery", "read books", "tidy room"],
+    };
+    expect(copyPerson).toEqual(person);
   });
 });
