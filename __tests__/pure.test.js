@@ -1,4 +1,9 @@
-const { removeLastNumber, raiseSalaries, updateTasks } = require("../pure");
+const {
+  removeLastNumber,
+  raiseSalaries,
+  updateTasks,
+  cloneObject,
+} = require("../pure");
 
 describe("removeLastNumber", () => {
   test("returns empty array when given one item", () => {
@@ -195,4 +200,34 @@ describe("updateTasks", () => {
     };
     expect(copyPerson).toEqual(person);
   });
+});
+
+describe("cloneObject", () => {
+  test("returns target object", () => {
+    const target = { a: 1, b: 2 };
+    const source = {};
+    const result = cloneObject(target);
+    const expected = { a: 1, b: 2 };
+    expect(result).toBe(target);
+  });
+  test("if source object is empty, output has same key-value pairs as target object", () => {
+    const target = { a: 1, b: 2 };
+    const source = {};
+    const result = cloneObject(target);
+    const expected = { a: 1, b: 2 };
+    expect(result).toEqual(target);
+  });
+  test("returns all key value pairs from target+source when they do not share keys", () => {
+    const target = { a: 1, b: 2 };
+    const source = { c: 3, d: 4 };
+    const result = cloneObject(target);
+    const expected = { a: 1, b: 2, c: 3, d: 4 };
+    expect(result).toEqual(target);
+  });
+  //0. returns target object - doing this first because in this test it WANTS us to mutate, when it doesn't want us to mutate doing it last makes more sense
+  //1. if source object is empty, output has same key-value pairs as target object
+  //2. returns all key value pairs from target+source when they do not share keys
+  //3. returns all key value pairs from target+source when they do share keys
+  //4. target object HAS been mutated
+  //5. source object has NOT been mutated
 });
