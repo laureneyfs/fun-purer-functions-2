@@ -257,7 +257,7 @@ describe("calculateConfectioneryCosts", () => {
         purchaseToday: {
           item: "White mice",
           costPerItem: "£3",
-          amountBought: 17,
+          amountBought: 0,
         },
       },
     ];
@@ -289,7 +289,71 @@ describe("calculateConfectioneryCosts", () => {
       },
     ];
     // Act
-    const result = calculateConfectioneryCosts(input)
+    const result = calculateConfectioneryCosts(input);
+    // Assert
+    expect(result).toEqual(expected);
+  });
+
+  test("returns the new array with multiple objects", () => {
+    // Arrange
+    const input = [
+      {
+        name: "Beyonce Bowls",
+        yearlyCumulativeSpend: "£44",
+        purchaseToday: {
+          item: "White mice",
+          costPerItem: "£3",
+          amountBought: 17,
+        },
+      },
+      {
+        name: "Kray-Z",
+        yearlyCumulativeSpend: "£28",
+        purchaseToday: {
+          item: "Flying saucers",
+          costPerItem: "£2",
+          amountBought: 28,
+        },
+      },
+      {
+        name: "Matey Terry",
+        yearlyCumulativeSpend: "£36",
+        purchaseToday: {
+          item: "Cola bottles",
+          costPerItem: "£4",
+          amountBought: 81,
+        },
+      },
+      {
+        name: "Justine Klimberbake",
+        yearlyCumulativeSpend: "£30",
+        purchaseToday: {
+          item: "Giant jelly snakes",
+          costPerItem: "£103",
+          amountBought: 2,
+        },
+      },
+    ];
+    const expected = [
+      {
+        name: "Beyonce Bowls",
+        yearlyCumulativeSpend: "£95",
+      },
+      {
+        name: "Kray-Z",
+        yearlyCumulativeSpend: "£84",
+      },
+      {
+        name: "Matey Terry",
+        yearlyCumulativeSpend: "£360",
+      },
+      {
+        name: "Justine Klimberbake",
+        yearlyCumulativeSpend: "£236",
+      },
+    ];
+    // Act
+    const result = calculateConfectioneryCosts(input);
     // Assert
     expect(result).toEqual(expected);
   });

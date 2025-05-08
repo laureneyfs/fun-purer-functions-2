@@ -29,22 +29,35 @@ function cloneObject(target, source = {}) {
 }
 
 function calculateConfectioneryCosts(popStars) {
-  const cost = popStars.purchaseToday[costPerItem];
-
-  
-  const newArray =  popStars.map((star) => {
-    const totalDailySpend = star.purchaseToday[item] * star.purchaseToday[amountBought];
-
+  const regex = /\d+/;
+  const newArray = popStars.map((star) => {
+    const currentYCS = star.yearlyCumulativeSpend;
+    const currentCPI = star.purchaseToday.costPerItem;
+    const yearlyCumulativeSpendNumber = Number(currentYCS.match(regex));
+    const costPerItemNumber = Number(currentCPI.match(regex));
+    const amountBoughtNumber = star.purchaseToday.amountBought;
+    const newTotal =
+      yearlyCumulativeSpendNumber + amountBoughtNumber * costPerItemNumber;
     return {
       name: star.name,
-      yearlyCumulativeSpend: star.yearlyCumulativeSpend,
-    }
-  })
-  
+      yearlyCumulativeSpend: `£${newTotal}`,
+    };
+  });
+  return newArray;
 }
 
-calculateConfectioneryCosts()
-
+const test = [
+  {
+    name: "Beyonce Bowls",
+    yearlyCumulativeSpend: "£44",
+    purchaseToday: {
+      item: "White mice",
+      costPerItem: "£3",
+      amountBought: 17,
+    },
+  },
+];
+calculateConfectioneryCosts(test);
 
 module.exports = {
   removeLastNumber,
