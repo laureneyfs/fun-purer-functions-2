@@ -21,16 +21,10 @@ function updateTasks(person, ...tasks) {
   copyPerson.tasks.push(...tasks);
   return copyPerson;
 }
-function cloneObject(target, source) {
-  const sourceEntries = Object.entries(source);
-  for (let i = 0; i < sourceEntries.length; i++) {
-    const sourceKeyEntry = sourceEntries[i][0];
-    console.log(target[sourceKeyEntry]);
-    if (target[sourceKeyEntry]) {
-      delete target[keyEntry];
-    }
+function cloneObject(target, source = {}) {
+  for (const [key, value] of Object.entries(source)) {
+    target[key] = value;
   }
   return target;
 }
-// const sourceValueEntry = sourceEntries[i][1]
 module.exports = { removeLastNumber, raiseSalaries, updateTasks, cloneObject };
