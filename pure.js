@@ -27,4 +27,29 @@ function cloneObject(target, source = {}) {
   }
   return target;
 }
-module.exports = { removeLastNumber, raiseSalaries, updateTasks, cloneObject };
+
+function calculateConfectioneryCosts(popStars) {
+  const cost = popStars.purchaseToday[costPerItem];
+
+  
+  const newArray =  popStars.map((star) => {
+    const totalDailySpend = star.purchaseToday[item] * star.purchaseToday[amountBought];
+
+    return {
+      name: star.name,
+      yearlyCumulativeSpend: star.yearlyCumulativeSpend,
+    }
+  })
+  
+}
+
+calculateConfectioneryCosts()
+
+
+module.exports = {
+  removeLastNumber,
+  raiseSalaries,
+  updateTasks,
+  cloneObject,
+  calculateConfectioneryCosts,
+};

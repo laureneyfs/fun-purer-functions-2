@@ -3,6 +3,7 @@ const {
   raiseSalaries,
   updateTasks,
   cloneObject,
+  calculateConfectioneryCosts,
 } = require("../pure");
 
 describe("removeLastNumber", () => {
@@ -243,4 +244,53 @@ describe("cloneObject", () => {
   //2. returns all key value pairs from target+source when they do not share keys
   //3. returns all key value pairs from target+source when they do share keys
   //5. source object has NOT been mutated
+});
+
+describe("calculateConfectioneryCosts", () => {
+  //
+  test("returns new array of just name and yearly spend", () => {
+    // Arrange
+    const input = [
+      {
+        name: "Beyonce Bowls",
+        yearlyCumulativeSpend: "£44",
+        purchaseToday: {
+          item: "White mice",
+          costPerItem: "£3",
+          amountBought: 17,
+        },
+      },
+    ];
+    const expected = [{ name: "Beyonce Bowls", yearlyCumulativeSpend: "£44" }];
+    // act
+    const result = calculateConfectioneryCosts(input);
+    // Assert
+    expect(result).toEqual(expected);
+    expect(result).not.toBe(input);
+  });
+
+  test("returns the same new array with updated values", () => {
+    // Arrange
+    const input = [
+      {
+        name: "Beyonce Bowls",
+        yearlyCumulativeSpend: "£44",
+        purchaseToday: {
+          item: "White mice",
+          costPerItem: "£3",
+          amountBought: 17,
+        },
+      },
+    ];
+    const expected = [
+      {
+        name: "Beyonce Bowls",
+        yearlyCumulativeSpend: "£95",
+      },
+    ];
+    // Act
+    const result = calculateConfectioneryCosts(input)
+    // Assert
+    expect(result).toEqual(expected);
+  });
 });
